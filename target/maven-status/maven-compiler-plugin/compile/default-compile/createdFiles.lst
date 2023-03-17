@@ -1,0 +1,12 @@
+com\java\spring\soap\api\generated\CelsiusToFahrenheitResponse.class
+com\java\spring\soap\api\generated\CelsiusToFahrenheit.class
+com\java\spring\soap\api\controller\SoapController.class
+com\java\spring\soap\api\clinet\SoapClinet$1.class
+com\java\spring\soap\api\generated\FahrenheitToCelsiusResponse.class
+com\java\spring\soap\api\generated\ObjectFactory.class
+com\java\spring\soap\api\config\SoapConfig.class
+com\java\spring\soap\api\generated\FahrenheitToCelsius.class
+com\java\spring\soap\api\SpringBootWsClientApplication.class
+com\java\spring\soap\api\generated\package-info.class
+com\java\spring\soap\api\clinet\SoapClinet.class
+com\java\spring\soap\api\dto\CelsiusToFahrenheitDTO.class

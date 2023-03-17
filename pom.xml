@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.javatechie</groupId>
+	<artifactId>spring-boot-sopa-ws-client</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>spring-boot-sopa-ws-client</name>
+	<description>Integration test using spring boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>${parent.version}</version>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>java11</id>
+			<activation>
+				<jdk>[11,)</jdk>
+			</activation>
+
+			<dependencies>
+				<dependency>
+					<groupId>org.glassfish.jaxb</groupId>
+					<artifactId>jaxb-runtime</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- tag::wsdl[] -->
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.14.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<schemaLanguage>WSDL</schemaLanguage>
+					<!--					<schemaDirectory>${basedir}/src/main/resources/wsdl</schemaDirectory>-->
+					<!--					<schemaIncludes>-->
+					<!--						<include>studentDetailsWsdl.wsdl</include>-->
+					<!--					</schemaIncludes>-->
+					<!--					<generatePackage>com.example.consumingwebservice.wsdl</generatePackage>-->
+					<!--generatePackage Kapatılırsa kendi default packatler oluturarak ayırılır -->
+					<generatePackage>com.java.spring.soap.api.generated</generatePackage>
+					<generateDirectory>${project.basedir}/src/main/java</generateDirectory>
+					<!--					useActiveProxyAsHttpproxy Setting xml proxy bilgileri okunması sağlanır -->
+					<!--                    					<useActiveProxyAsHttpproxy>true</useActiveProxyAsHttpproxy>-->
+					<accessExternalSchema>all</accessExternalSchema>
+					<accessExternalDTD>all</accessExternalDTD>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<addCompileSourceRoot>false</addCompileSourceRoot>
+					<schemas>
+						<schema>
+							<url>https://www.w3schools.com/xml/tempconvert.asmx?WSDL</url>
+						</schema>
+						<schema>
+							<fileset>
+								<!-- Defaults to schemaDirectory. -->
+								<!--								<directory>${project.basedir}/src/main/resources/wsdl</directory>-->
+								<!-- Defaults to schemaIncludes. -->
+								<includes>
+									<include>*.wsdl</include>
+								</includes>
+								<!-- Defaults to schemaIncludes -->
+								<excludes>
+									<exclude>*.xs</exclude>
+								</excludes>
+							</fileset>
+						</schema>
+					</schemas>
+				</configuration>
+			</plugin>
+			<!-- end::wsdl[] -->
+		</plugins>
+	</build>
+
+</project>
